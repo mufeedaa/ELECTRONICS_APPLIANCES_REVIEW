@@ -1,0 +1,94 @@
+{% extends 'products_manager/manager_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | MANAGER HOME 
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+   <div class="row column_title">
+      <div class="col-md-12">
+         <div class="page_title">
+            <h2>Home</h2>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- <div class="row column1">
+    <div class="col-md-6 col-lg-3">
+       <div class="full counter_section margin_bottom_30">
+          <div class="couter_icon">
+             <div> 
+                <i class="fa fa-user yellow_color"></i>
+             </div>
+          </div>
+          <div class="counter_no">
+             <div>
+                <p class="total_no">{{ appliance_count }}</p>
+                <p class="head_couter">APPLIANCES</p>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+       <div class="full counter_section margin_bottom_30">
+          <div class="couter_icon">
+             <div> 
+                <i class="fa fa-clock-o blue1_color"></i>
+             </div>
+          </div>
+          <div class="counter_no">
+             <div>
+                <p class="total_no">{{ category_count }} </p>
+                <p class="head_couter">CATEGORIES</p>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+       <div class="full counter_section margin_bottom_30">
+          <div class="couter_icon">
+             <div> 
+                <i class="fa fa-cloud-download green_color"></i>
+             </div>
+          </div>
+          <div class="counter_no">
+             <div>
+                <p class="total_no">1,805</p>
+                <p class="head_couter">Collections</p>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+       <div class="full counter_section margin_bottom_30">
+          <div class="couter_icon">
+             <div> 
+                <i class="fa fa-comments-o red_color"></i>
+             </div>
+          </div>
+          <div class="counter_no">
+             <div>
+                <p class="total_no">54</p>
+                <p class="head_couter">Comments</p>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div> -->
+
+ <div style="background-color: white;">  
+   <h1 style="padding-left: 20%;"> HELLO!!!   {{user.username }} </h1><br><br>
+   <h2 style="padding-left: 20%;"> WELCOME TO ELECTRO.</h2><br><br>
+
+   <h3 style="color: black; padding-left: 10%;"> INSTRUCTIONS </h3><br>
+   <p style="color: black; padding-left: 8%;">1. Create your Categories.<br>
+      2. Then add your appliance choosing thier category.<br>
+      3. add your appliance Model name, appliance image, description, price and offer .</p>
+
+ </div>
+
+
+{% endblock %}

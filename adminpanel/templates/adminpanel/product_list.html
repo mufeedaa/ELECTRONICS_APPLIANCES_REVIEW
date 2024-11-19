@@ -1,0 +1,81 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | Appliance list
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+   <div class="row column_title">
+      <div class="col-md-12">
+         <div class="page_title">
+            <h2>APPLIANCE LIST </h2>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row mb-5">
+      
+     {% for appliance in appliances %}
+     
+     <div class="col-md col-lg-12">
+       <div class="card mb-3">
+         <div class="row g-0">
+          
+           <div class="col-md-4">
+            <img class="card-img card-img-left" src="{{ appliance.image.url }}" alt="appliance image" height="90%" />
+           </div>
+           <a href="{% url 'admin_productview' appliance.id %}">
+           <div class="col-md-8">
+             <div class="card-body">
+              
+              <h6 class="card-title">{{ appliance.author.first_name  }}</h6>
+             <h5 class="card-title"><b>{{ appliance.name  }} </b>   {{ appliance.category }}</h5>
+             <h5> - {{ appliance.offer }} %
+            </h5>
+            <h4 class="product-price"> Rs. {{ appliance.discount }}  </h4>
+             <h5>M.R.P : Rs.  <del class="product-old-price" style="color: red;"> {{ appliance.price }} </del> </h5>
+            <p class="card-text"> 
+             
+             <p class="card-text">{{ appliance.description|truncatewords:20 }} 
+             </p><br>
+             <!-- <p class="card-text" style="color: black;"> Released on : {{ appliance.release_date }} </p> <br> -->
+              <!-- Updated on :{{ appliance.updated_at }} </small></p> -->
+              {% if appliance.average_rating %}
+
+              <h5> <p style=" color: black;">customer Rating :  {{ appliance.average_rating|floatformat:1 }}  out of  5 <br>
+               
+                {% for i in star_range %}
+                {% if i <= appliance.average_rating %}
+                
+                    ⭐
+                {% else %}
+                    ☆
+                {% endif %}
+            {% endfor %}
+
+            {% else %}
+            <p> No rating available in this appliance </p>
+                </h5>
+                {% endif %}
+             </p>
+             
+            </a>
+          </div>
+          
+            </div>
+            
+          </div>
+       </div>
+     </div>
+     {% empty %}
+              <p>No appliances available.</p>
+     
+     {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}

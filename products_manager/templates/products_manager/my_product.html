@@ -1,0 +1,84 @@
+{% extends 'products_manager/manager_base.html' %}
+{% load static %}
+{% block title %}
+
+ELECTRONICS APPLIANCES | MY APPLIANCE LIST
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2> MY APPLIANCES LIST </h2>
+          </div>
+       </div>
+    </div>
+ </div>
+<br><br>
+
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <div class="row mb-5">
+      
+     {% for appliance in appliances %}
+     
+     <div class="col-md col-lg-12">
+       <div class="card mb-3">
+         <div class="row g-0">
+          
+           <div class="col-md-4">
+            <img class="card-img card-img-left" src="{{ appliance.image.url }}" alt="appliance image" height="90%" />
+           </div>
+           <a href="{% url 'manager_productview' appliance.id %}">
+           <div class="col-md-8">
+             <div class="card-body">
+              
+              <h6 class="card-title">{{ appliance.author.first_name  }}</h6>
+             <h5 class="card-title"><b>{{ appliance.name  }} </b>   {{ appliance.category }}</h5>
+             
+             <h4 class="product-price">-{{ appliance.offer}}%  Rs. {{ appliance.discount }}  <br> Rs. <del class="product-old-price" style="color: red;"> {{ appliance.price }} </del> </h4>
+             <p class="card-text"> 
+             <small class="text-muted">Published on :{{ appliance.created_at}}</small></p>
+             <p class="card-text">{{ appliance.description|truncatewords:10 }} 
+               
+             </p>
+              <p class="card-text"><small class="text-muted">Updated on :{{ appliance.updated_at }} </small></p>
+             
+            </a>
+          </div>
+          <div style="padding-left: 30%;">
+            <!-- <a href="{% url 'manager_productview' appliance.id %}" class="btn btn-outline-prismary " style="background-color: brown; color: white;" >VIEW MORE</a> -->
+            <a href="{% url 'manager_editproduct' appliance.id %}" class="btn cur-p btn-warning" >EDIT </a>
+            <a href="{% url 'manager_deleteproduct' appliance.id %}" class="btn cur-p btn-danger" >DELETE </a>
+            
+            {% if appliance.status == 'hidden' %}
+              <form action="{% url 'manager_productstatus' appliance.id %}" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="appliance" value="{{ appliance.id }}" >
+                <button type="submit" name="show" value="show" class="btn cur-p btn-info">SHOW</button>
+              </form>
+                {% else %}
+                <form action="{% url 'manager_productstatus' appliance.id %}" style="display: inline;">
+                  {% csrf_token %}
+                  <input type="hidden" name="appliance" value="{{ appliance.id }}" >
+  
+                  <button type="submit" name="show" value="show" class="btn cur-p btn-info">HIDE</button>
+                </form>
+               
+                {% endif %}
+            <br><br>
+        </div>
+            </div>
+            
+          </div>
+       </div>
+     </div>
+     {% empty %}
+              <p>No appliances available.</p>
+     
+     {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>{% block title%} {% endblock %}</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- site icon -->
+      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'css_a/bootstrap.min.css' %}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{% static 'style.css' %}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{% static 'css_a/responsive.css' %}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{% static 'css_a/colors.css' %}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{% static 'css_a/bootstrap-select.css' %}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{% static 'css_a/perfect-scrollbar.css' %}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{% static 'css_a/custom.css' %}" />
+      <!-- calendar file css -->
+      <link rel="stylesheet" href="{% static 'js_a/semantic.min.css' %}" />
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.{% static 'js_a/1.4.2/respond.min.js' %}"></script>
+      <![endif]-->
+   </head>
+   <body class="inner_page login">
+    {%  if messages %}
+    {% for message in messages %}
+    <script>
+     alert('{{ message }}')
+    </script>
+    {% endfor %}
+    {% endif %}  
+
+    {% block content %} {% endblock%}
+      <div class="full_container">
+         <div class="container">
+            <div class="center verticle_center full_height">
+               <div class="login_section">
+                  <div class="logo_login">
+                     <div class="center">
+                        <img width="210" src="{% static  'img/logo.png ' %}" alt="#" />
+                     </div>
+                  </div>
+                  <div class="login_form">
+                     <form method="POST" name="login" id="login">
+                        {% csrf_token %}
+                        <fieldset>
+                           <div class="field">
+                            
+                              <label class="label_field">Username :</label>
+                              {{ form.username }}
+                              <!-- <input type="email" name="email" placeholder="E-mail" /> -->
+                           </div>
+                           <div class="field">
+                            
+                              <label class="label_field">Password :</label>
+                              {{ form.password }}
+                              <!-- <input type="password" name="password" placeholder="Password" /> -->
+                           </div>
+                           <br><br>
+                           <div class="field margin_0"><a href="{% url 'admin_home' %}">
+                              <label class="label_field hidden">hidden label</label>
+                              <button type="submit" class="main_bt" >Sing In</button></a>
+                           </div>
+                       
+                        </fieldset>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- jQuery -->
+      <script src="{% static 'js_a/jquery.min.js' %}"></script>
+      <script src="{% static 'js_a/popper.min.js' %}"></script>
+      <script src="{% static 'js_a/bootstrap.min.js' %}"></script>
+      <!-- wow animation -->
+      <script src="{% static 'js_a/animate.js' %}"></script>
+      <!-- select country -->
+      <script src="{% static 'js_a/bootstrap-select.js' %}"></script>
+      <!-- nice scrollbar -->
+      <script src="{% static 'js_a/perfect-scrollbar.min.js' %}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="{% static 'js_a/custom.js' %}"></script>
+   </body>
+</html>

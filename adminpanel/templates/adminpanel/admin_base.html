@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>{% block title %} {% endblock %}</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <link rel="stylesheet" href="{% static 'path/to/bootstrap.min.css' %}">
+      <!-- site icon -->
+      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/png" />
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'css_a/bootstrap.min.css' %}" />
+      <!-- site css -->
+      <link rel="stylesheet" href="{% static 'style.css' %}" />
+      <!-- responsive css -->
+      <link rel="stylesheet" href="{% static 'css_a/responsive.css' %}" />
+      <!-- color css -->
+      <link rel="stylesheet" href="{% static 'css_a/colors.css' %}" />
+      <!-- select bootstrap -->
+      <link rel="stylesheet" href="{% static 'css_a/bootstrap-select.css' %}" />
+      <!-- scrollbar css -->
+      <link rel="stylesheet" href="{% static 'css_a/perfect-scrollbar.css' %}" />
+      <!-- custom css -->
+      <link rel="stylesheet" href="{% static 'css_a/custom.css' %}" />
+
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css">
+      <!-- [if lt IE 9]> -->
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js" ></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <!-- <![endif] -->
+   </head>
+   <body class="dashboard dashboard_1">
+   
+      <div class="full_container">
+         <div class="inner_container">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+               <div class="sidebar_blog_1">
+                  <div class="sidebar-header">
+                     <div class="logo_section">
+                        <a href=""><img class="logo_icon img-responsive" src="{% static 'images/logo/logo_icon.png' %}" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="sidebar_user_info">
+                     <div class="icon_setting"></div>
+                     <div class="user_profle_side">
+                        <div class="user_img"><img class="img-responsive" src="{% static 'images/layout_img/admin.jpeg' %}" alt="#" /></div>
+                        <div class="user_info">
+                           <h6>appliance</h6>
+                           <p><span class="online_animation"></span> Online</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="sidebar_blog_2">
+                  <a href="{% url 'admin_home' %}">
+                  <h4>HOME</h4></a>
+                  <ul class="list-unstyled components">
+                     <li >
+                     <a href = "{% url 'admin_userlist' %}" ><i class="fa fa-user yellow_color"></i> <span>USERS</span></a>
+                        
+                     </li>
+                     <li><a href="{% url 'admin_productlist' %}"><i class="fa fa-list orange_color"></i> <span>APPLIANCES</span></a></li>
+
+                     <li><a href="{% url 'admin_managerlist' %}"><i class="fa fa-diamond purple_color"></i> <span>BRANDS</span></a></li>
+                     
+                     
+                  </ul>
+               </div>
+            </nav>
+            <!-- end sidebar -->
+            <!-- right content -->
+            <div id="content">
+               <!-- topbar -->
+               <div class="topbar">
+                  <nav class="navbar navbar-expand-lg navbar-light">
+                     <div class="full">
+                        <button type="button" id="sidebarCollapse" class="sidebar_toggle"><i class="fa fa-bars"></i></button>
+                        <div class="logo_section">
+                           <a href=""><img class="img-responsive" src="{% static 'img/logo.png' %}" height="500px" alt="#" /></a>
+                        </div>
+                        <div class="right_topbar">
+                           <div class="icon_info">
+                              <!-- <ul>
+                                 <li><a href="#"><i class="fa fa-bell-o"></i><span class="badge">2</span></a></li>
+                                 <li><a href="#"><i class="fa fa-question-circle"></i></a></li>
+                                 <li><a href="#"><i class="fa fa-envelope-o"></i><span class="badge">3</span></a></li>
+                              </ul> -->
+                              <ul class="user_profile_dd">
+                                 <li>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><img class="img-responsive rounded-circle" src="{% static 'images/layout_img/user_img.jpg' %}" alt="#" /><span class="name_user">{{ user.username }} </span></a>
+                                    <div class="dropdown-menu">
+                                       <!-- <a class="dropdown-item" href="profile.html"><i class="fa fa-user"></i> My Profile</a> -->
+                                      
+                                       <a class="dropdown-item" href="{% url 'admin_resetpassword' %}"><i class="fa fa-key"></i> Reset Password</a>
+                                       <a class="dropdown-item" href="{% url 'admin_logout' %}"><i class="fa fa-sign-out"></i><span> Log Out</span> </a>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </nav>
+               </div>
+               <!-- end topbar -->
+               <!-- dashboard inner -->
+               <div class="midde_cont">
+                  {%  if messages %}
+                  {% for message in messages %}
+                  <script>
+                   alert('{{ message }}')
+                  </script>
+                  {% endfor %}
+                  {% endif %}
+                  
+                     <!-- graph -->
+                     {% block content %}
+                     {% endblock %}
+                     <br><br><br><br><br><br><br><br>
+                     <!-- <br><br><br><br><br><br><br><br><br> -->
+                     
+                     <!-- end graph -->
+                     <div class="row column3">
+                      
+                     </div>
+                   
+                  </div>
+                  <!-- footer -->
+                  <div class="container-fluid">
+                     <div class="footer">
+                        <p>Copyright © 2018 Designed by html.design. All rights reserved.<br><br>
+                           Distributed By: <a href="">ELECTRO.</a>
+                        </p>
+                     </div>
+                  </div>
+               </div>
+               <!-- end dashboard inner -->
+            </div>
+         </div>
+      </div>
+      <!-- jQuery -->
+      <script src="{% static 'js_a/jquery.min.js' %}"></script>
+      <script src="{% static 'js_a/popper.min.js' %}"></script>
+      <script src="{% static 'js_a/bootstrap.min.js' %}"></script>
+      <!-- wow animation -->
+      <script src="{% static 'js_a/animate.js' %}"></script>
+      <!-- select country -->
+      <script src="{% static 'js_a/bootstrap-select.js' %}"></script>
+      <!-- owl carousel -->
+      <script src="{% static 'js_a/owl.carousel.js' %}"></script> 
+      <!-- chart js -->
+      <script src="{% static 'js_a/chart.min.js' %}"></script>
+      <script src="{% static 'js_a/chart.bundle.min.js' %}"></script>
+      <script src="{% static 'js_a/utils.js' %}"></script>
+      <script src="{% static 'js_a/analyser.js' %}"></script>
+      <!-- nice scrollbar -->
+      <script src="{% static 'js_a/perfect-scrollbar.min.js' %}"></script>
+      <script>
+         var ps = new PerfectScrollbar('#sidebar');
+      </script>
+      <!-- custom js -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+      <!-- Bootstrap JS -->
+      <script src="{% static 'path/to/bootstrap.bundle.min.js' %}"></script>
+
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+      <script src="{% static 'js_a/custom.js' %}"></script>
+      <script src="{% static 'js_a/chart_custom_style1.js' %}"></script>
+   </body>
+</html>

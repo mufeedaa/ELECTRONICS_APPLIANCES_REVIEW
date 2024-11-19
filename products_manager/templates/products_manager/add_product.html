@@ -1,0 +1,28 @@
+{% extends 'products_manager/manager_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | ADD CATEGORY 
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2> CREATE APPLIANCES </h2>
+          </div>
+       </div>
+    </div>
+ </div>
+ <br>
+
+ <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    <input type="submit" value="Add Appliance" class=" btn btn-primary">
+
+    
+</form>
+ {% endblock %}

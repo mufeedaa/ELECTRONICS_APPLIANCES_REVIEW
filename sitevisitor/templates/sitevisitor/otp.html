@@ -1,0 +1,41 @@
+{% extends 'sitevisitor/site_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | otp
+
+{% endblock %}
+
+{% block content %}
+<div class="container p-5" style="box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); padding: 40px;
+            border-radius: 8px; background: linear-gradient(#E9374C,#D31128); ">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-5 mt-5">
+            <div class="bg-white p-5 rounded-3 shadow-sm border" style=" color: #fff;
+            font-size: 13px;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(0,0,0,0.2);
+            width: 50%;
+            padding: 70px 0;
+            vertical-align: top;
+            display: inline-block; " >
+                <div>
+                    
+                        <form method="POST" action="{% url 'site_otp' %}" >
+                      
+                            {% csrf_token %}
+                           {{ form.as_p }}
+
+                           <input type="submit" value="verify otp" class="btn btn-primary">
+                        </form>
+                        
+                    
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

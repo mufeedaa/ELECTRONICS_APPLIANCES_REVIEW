@@ -1,0 +1,125 @@
+{% extends 'products_manager/manager_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | Appliance
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2> APPLIANCE </h2>
+          </div>
+       </div>
+    </div>
+ </div>
+<br><br>
+
+<div class="row mb-5">
+    
+    <div class="col-md-6 col-lg-12 mb-3">
+      <div class="card h-100">
+        <img class="card-img-top" src="{{ appliance.image.url }}" alt="Card image cap" style="display: flex; justify-content: center;  align-items: center;width: 50%; 
+        max-width: 800px;  
+        height: auto;  "  />
+        <div class="card-body">
+         <h3 class="card-title">{{ appliance.author.first_name }} {{ appliance.name }}</h3>
+         <h4>{{ appliance.category }}</h4>
+         {% if not forloop.last %}
+        <hr class="review-divider">
+    {% endif %}
+          <p class="card-text">
+            {{ appliance.description}}
+          </p><p class="card-text">  Released date : {{ appliance.release_date }} </p><br>
+          {% if not forloop.last %}
+          <hr class="review-divider">
+      {% endif %}
+          <h5>  </h5>
+          <h4 class="product-price">-{{ appliance.offer}}%  Rs. {{ appliance.discount }}  <br></h4>
+          <h4>M.R.P:  Rs.  <del class="product-old-price" style="color: red;"> {{ appliance.price }} </del> </h4>
+          {% if not forloop.last %}
+          <hr class="review-divider">
+      {% endif %}
+            <h4>RATINGS</h4>
+
+           <h5> <p style=" color: black;">Average Rating :  {{ average_rating|floatformat:1 }}/5 <br>
+              {% for i in star_range %}
+              {% if i <= average_rating %}
+                  ⭐
+              {% else %}
+                  ☆
+              {% endif %}
+          {% endfor %}
+   </p></h5>
+   <p>{{ average_rating|floatformat:1 }} / 5.0 ({{ total_ratings }} Ratings)</p>
+
+   {% if not forloop.last %}
+   <hr class="review-divider">
+{% endif %}
+            <div>
+               <h5>ALL REVIEWS ({{ total_ratings}}) </h5><br><br>
+               {% for review in reviews %}
+               <div>
+   
+                 <table >
+                   <tr>
+                     <td><strong> {{ review.author }} </strong></td>
+                     <td rowspan="3">
+                      <div style="padding-left: 600%;">
+                         {% if user.is_manager %} 
+                       
+                         {% if review.status == 'Hidden' %}
+                         <form action="{% url 'manager_showreview' review.id %}" method="POST" style="display: inline;">
+                           {% csrf_token %}
+                           <input type="hidden" name="review_id" value="{{ review.id }}" >
+                             <button type="submit" name="show" value="show" class="btn cur-p btn-primary" >SHOW</button>
+             
+                         </form>
+                         {% else %}
+                             <form action="{% url 'manager_hidereview' review.id %}" style="display: inline;">
+                               {% csrf_token %}
+                               <input type="hidden" name="review_id" value="{{ review.id }}" >
+                               <button type="submit" name="hide" value="hide" class="btn cur-p btn-danger" >HIDE</button>
+                             </form>
+                            
+                             {% endif %}
+                             {% endif %}
+                           </div>
+                     </td>
+                   </tr>
+                   <tr><td> {% if review.sample_image %}
+                     <img src="{{ review.sample_image.url }}" alt="Review Image" style="max-width: 200px; max-height: 200px;">
+                 {% endif %} </td></tr>
+                   <tr><td style="color: black;">{{ review.review }}</td></tr>
+               
+                 <tr><td>
+               
+               {% for i in star_range %}
+               {% if i <= review.rating %}
+                   ⭐
+               {% else %}
+                   ☆
+               {% endif %}
+           {% endfor %}
+   
+                 </td></tr>
+                 <tr><td><small> Reviewed on {{ review.created_at }} </small></td></tr>
+                 </table><br>
+               </div> {% if not forloop.last %}
+               <hr class="review-divider">
+           {% endif %}
+               {% empty %}
+               
+               <p>No reviews available.</p>
+              
+               {% endfor %}
+               
+             </div>
+         </div>
+
+      </div>
+   </div>  
+   </div> 
+{% endblock %}            

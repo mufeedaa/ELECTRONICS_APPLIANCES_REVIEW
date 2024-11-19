@@ -1,0 +1,37 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | edit_profile 
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2>PROFILE</h2>
+          </div>
+       </div>
+    </div>
+ </div>
+ <br>
+<div>
+    
+        <div class="container-xxl flex-grow-1 container-p-y" style="background-color: white;
+        align-items: center; display: flex; justify-content: center;">
+            <form method="post" enctype="multipart/form-data" >
+        
+                {% csrf_token %}
+                {{ form.as_p }}
+        
+                {{ pro_form.as_p }}
+        
+                <input type="submit" value=" Update" class="btn btn-primary">
+        
+            </form>
+            </div>
+<br><br></div>
+
+    
+{% endblock %}

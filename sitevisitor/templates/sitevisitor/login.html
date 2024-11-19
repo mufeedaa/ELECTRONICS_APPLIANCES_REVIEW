@@ -1,0 +1,94 @@
+{% extends 'sitevisitor/site_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | sitevisitor login
+
+{% endblock %}
+
+{% block content %}
+
+<div class="form-bg">
+    <div class="container"  style=" background: linear-gradient(#E9374C,#D31128);
+    font-family: 'Roboto', sans-serif;
+    font-size: 0;
+    padding: 0 15px;
+    border: 1px solid #DC2036;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2); padding-bottom: 15px;"><br>
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8">
+                <div class="form-container" style=" background: linear-gradient(#E9374C,#D31128);
+                font-family: 'Roboto', sans-serif;
+                font-size: 0;
+                padding: 0 15px;
+                border: 1px solid #DC2036;
+                border-radius: 15px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.2);width: 100%;
+                margin: 0;"><br>
+               
+                    <div class="form-icon" style=" color: #fff;
+                    font-size: 13px;
+                    text-align: center;
+                    text-shadow: 0 0 20px rgba(0,0,0,0.2);
+                    width: 50%;
+                    padding: 70px 0;
+                    vertical-align: top;
+                    display: inline-block; " >
+                        <i class="fa fa-user-circle" style="font-size: 124px;
+                        margin: 0 0 15px;
+                        display: block;"></i>
+                        <span class="signup"><a href="{% url 'site_register' %}" style="color: #fff;
+                          text-transform: capitalize;
+                          transition: all 0.3s ease;">Don't have account? Signup</a></span>
+                    </div>
+                    <form class="form-horizontal" id="formAuthentication" enctype="multipart/form-data" method="POST"
+                     style="background: rgba(255,255,255,0.99);
+                    width: 50%;
+                    padding: 60px 30px;
+                    margin: -20px 0;
+                    border-radius: 15px;
+                    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                    display: inline-block;">
+                     {% csrf_token %}
+                        <h3 class="title" style=" color: #454545;
+                        font-size: 23px;
+                        font-weight: 900;
+                        text-align: center;
+                        text-transform: capitalize;
+                        letter-spacing: 0.5px;
+                        margin: 0 0 30px 0;">Member Login</h3>
+                        <div class="form-group" >
+                        
+                            
+                            {{ form.username }}
+                           
+                        </div>
+                        <div class="form-group" >
+                            
+                            
+                            {{ form.password}}
+                        </div>
+                        <a href="{% url 'user_home' %}">
+                        <button type="submit" value="Register" class="btn signin" style=" color: rgba(255,255,255,0.8);
+                        background: #E9374C;
+                        font-size: 15px;
+                        font-weight: 500;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        width: 100%;
+                        margin: 0 0 10px 0;
+                        border: none;
+                        border-radius: 20px;
+                        transition: all 0.3s ease;">Login</button></a>
+                        <span class="forgot-pass" style=" font-size: 12px;
+                        text-align: center;
+                        display: block;"><a href="{% url 'site_forgotpassword' %}"  style=" color: #999;
+                        transition: all 0.3s ease;">Forgot Password?</a></span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+{% endblock %}

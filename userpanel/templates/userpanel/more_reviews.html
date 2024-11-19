@@ -1,0 +1,125 @@
+{% extends 'userpanel/user_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | REVIEWS LIST
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2>REVIEWS</h2>
+          </div>
+       </div>
+    </div>
+  </div>
+  <br>
+
+  <div class="col-md-6 col-lg-12 mb-3" style="background-color: white;">
+
+   <h4>RATINGS</h4>
+
+<h5> <p style=" color: black;">Average Rating :  {{ average_rating|floatformat:1 }}/5 <br>
+   {% for i in star_range %}
+   {% if i <= average_rating %}
+       ⭐
+   {% else %}
+       ☆
+   {% endif %}
+{% endfor %}
+</p></h5>
+
+<!--rating percentage  -->
+<div class="ratings">
+
+<p>{{ average_rating|floatformat:1 }} / 5.0 ({{ total_ratings }} Ratings)</p>
+</div>
+<br>
+<div>
+<h5>
+  ALL REVIEWS ({{ total_reviews }}) </h5><br>
+{% for review in all_reviews %}
+         
+<div>
+
+  <table >
+    
+    </tr>
+    <tr>
+      <td><strong> {{ review.author }} </strong></td>
+      <td rowspan="2">
+        {% if review.author == logged_user %}
+        <div class="dropdown_section" style="padding-left: 400px;">
+          <div class="dropdown dropleft">
+             <button type="button" class=" dropdown-toggle" data-toggle="dropdown"> </button>
+             <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'user_reviewedit' review.id %}">EDIT</a>
+                <a class="dropdown-item" href="{% url 'user_reviewdelete' review.id %}">DELETE</a>
+                <!-- <a class="dropdown-item" href="#">Dropdown link</a> -->
+             </div>
+          </div>
+       </div>{% endif %}
+   </td>
+    </tr>
+    <tr>
+      <td> <!-- Display Total Likes  -->
+        <p>Total Likes: <i class="fas fa-thumbs-up"></i> {{ review.total_likes }}</p>
+       
+</td>
+   
+    <tr><td> {% if review.sample_image %}
+      <img src="{{ review.sample_image.url }}" alt="Review Image" style="max-width: 200px; max-height: 200px;">
+  {% endif %} </td></tr>
+    <tr><td style="color: black;">{{ review.review }}</td>
+
+      <td>
+        <!-- Check if the user has liked the review -->
+        {% if user.is_authenticated %}
+        {% if user in review.likes.all %}
+        <form action="{% url 'user_unlikereview' review.id %}" method="post" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" title="Unlike" >
+              <i class="fas fa-thumbs-down"></i> Dislike</button>
+        </form>
+    {% else %}
+        <form action="{% url 'user_likereview' review.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" title="Like">
+              <i class="fas fa-thumbs-up"></i> Like</button>
+        </form>
+    {% endif %}
+      {% endif %}
+
+</td>
+    </tr>
+   <br>
+  <tr><td>
+
+{% for i in star_range %}
+{% if i <= review.rating %}
+    ⭐
+{% else %}
+    ☆
+{% endif %}
+{% endfor %}
+
+  </td></tr>
+  <tr><td><small>Reviewed on  {{ review.created_at }} </small></td></tr>
+  </table>
+</div>
+{% if not forloop.last %}
+        <hr class="review-divider">
+    {% endif %}
+{% empty %}
+<li>No reviews for this appliance yet.</li>
+
+
+
+{% endfor %}
+</div>
+
+</div>
+
+{% endblock %}

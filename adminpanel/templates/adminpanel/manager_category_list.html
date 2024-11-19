@@ -1,0 +1,60 @@
+{% extends 'adminpanel/admin_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | Category list
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+   <div class="row column_title">
+      <div class="col-md-12">
+         <div class="page_title">
+            <h2>CATEGORY LIST</h2>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="col-md-12">
+    <div class="white_shd full margin_bottom_30">
+       <div class="full graph_head">
+          <div class="heading1 margin_0">
+             <h2>ALL CATEGORIES OF {{ user.username }}</h2>
+          </div>
+       </div>
+       <div class="table_section padding_infor_info">
+          <div class="table-responsive-sm">
+             <table class="table table-dark table-striped">
+                <thead>
+                   <tr>
+                      <th>No</th>
+                      <th>CATEGORIES</th>
+                      <th>ACTIONS</th>
+                      
+                   </tr>
+                </thead>
+                <tbody>
+                  {% for category in categories %}
+                   <tr>
+                      <td> {{ forloop.counter }}</td>
+                      <td>{{ category.name}} </td>
+                     <td>
+                        <button type="submit"  class="btn cur-p btn-warning" ><a href="{% url 'admin_categoryappliance' category.id %}">show appliances</a>
+                        </button></td>
+                    
+                   </tr>
+                   {% empty %}
+                    <tr>
+                        <td colspan="2">No categories available.</td>
+                    </tr>
+                   {% endfor %}
+                </tbody>
+             </table>
+          </div>
+       </div>
+    </div>
+ </div>
+ <br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

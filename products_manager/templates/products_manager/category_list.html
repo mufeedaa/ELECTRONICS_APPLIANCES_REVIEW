@@ -1,0 +1,58 @@
+{% extends 'products_manager/manager_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | ADD CATEGORY 
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2> CATEGORY LIST </h2>
+          </div>
+       </div>
+    </div>
+ </div>
+<br><br>
+
+<div class="row m-3"></div>
+    <div class="col-12 text-center">
+        <table class="table table-warning table-striped">
+            <tr>
+                <!-- <th>ID</th> -->
+                <th>Category Name</th>
+                <th colspan="2"> Actions</th>
+            </tr>
+            {% for category in categories %}
+            {% if category.author == logged_user %}
+            <tr>
+                <!-- <td><label>{{ category.id }}</label></td> -->
+                <td><label style=" text-transform: uppercase; color: black;" >{{ category.name }}</label></td>
+                <td><a href="{% url 'manager_editcategory' category.id %}" class="btn btn-primary">Edit</a></td>
+                <td>
+                    <form method="post" action="{% url 'manager_deletecategory' category.id %}">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete Category " class="btn btn-danger"/>
+
+                    </form> 
+                    
+                </td>
+            </tr>
+
+            {% endif %}
+            {% empty %}
+            <p>No categories are available </p> 
+           
+            {% endfor %}
+        </table>
+        
+    </div>
+</div>
+
+       
+    
+<br><br><br><br><br><br>
+
+{% endblock %}

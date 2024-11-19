@@ -1,0 +1,30 @@
+{% extends 'products_manager/manager_base.html' %}
+{% load static %}
+{% block title %}
+ELECTRONICS APPLIANCES | EDIT CATEGORY 
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row column_title">
+       <div class="col-md-12">
+          <div class="page_title">
+             <h2> EDIT CATEGORY </h2>
+          </div>
+       </div>
+    </div>
+ </div>
+ <br><br>
+
+<div class="row m-3">
+    <div class="col-12">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-primary mt-3" value="Edit category"/>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
